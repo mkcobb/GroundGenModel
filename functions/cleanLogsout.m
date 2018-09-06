@@ -18,7 +18,7 @@ sigToRemove = [];
 for ii = 1:length(signalsUnique)
     if sum(strcmp(signalsUnique{ii},signals))>1
         occurrences = find(strcmp(signalsUnique{ii},signals));
-        sigToRemove = [sigToRemove; occurrences];
+        sigToRemove = [sigToRemove; occurrences(2:end)];
     end
 end
 logsout = logsout.removeElement(unique(sigToRemove));

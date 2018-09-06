@@ -5,19 +5,20 @@ sim('ILCUpdate_th')
 stopCallback
 
 %%
+
 close all
-figure
 
 subplot(3,1,1)
-tsc.simulationPhase.plot
+tsc.iterationReset.plot
 grid on
 
 subplot(3,1,2)
-tsc.basisParameters.plot
-grid on
+tsc.iterBasisParams.plot
+hold on
+line(get(gca,'XLim'),90*(pi/180)*[1 1])
+line(get(gca,'XLim'),60*(pi/180)*[1 1])
 
 subplot(3,1,3)
-tsc.ILCEnables.plot
-grid on
+tsc.iterPerformanceIndex.plot
 
 linkaxes(findall(gcf,'Type','Axes'),'x')

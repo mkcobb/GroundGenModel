@@ -1,6 +1,6 @@
 % Initialize variants
-defaultPerformanceIndex = 1;
-variants = {'MeanEnergy'};
+defaultPerformanceIndex = 2;
+variants = {'MeanEnergy','SpatialError'};
 % Create variant control variable in the workspace
 evalin('base',sprintf('VCPerformanceIndex=%d;',defaultPerformanceIndex))
 for ii = 1:length(variants)

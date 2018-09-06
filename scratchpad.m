@@ -1,12 +1,22 @@
 close all
-clc
+sim('SystemModel')
 
-tsc.rlsBasisParameters.plot
+stopCallback
+
+%%
+figure
+subplot(3,1,1)
+tsc.rlsUpdate.plot
+grid on
+
+subplot(3,1,2)
+tsc.performanceIndex.plot
 grid on
 hold on
-tsc.lsBasisParameters.plot
-handles.scatter = scatter(tsc.basisParameters.Time,tsc.basisParameters.data,...
-    'Marker','o','MarkerEdgeColor','g','MarkerFaceColor','g');
+tsc.rlsPerformanceIndex.plot
 
-uistack(handles.scatter,'bottom')
+subplot(3,1,3)
+tsc.iterBasisParams.plot
+grid on
+
 linkaxes(findall(gcf,'Type','Axes'),'x')
