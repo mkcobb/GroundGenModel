@@ -1,4 +1,5 @@
 clear;clear mex;
+fprintf('\nRunning %s\n',mfilename)
 % Change to the directory containing the model
 cd(fileparts(which('GroundGenProject.prj')))
 % Add all subdirectories to the path

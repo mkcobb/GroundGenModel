@@ -4,8 +4,9 @@ classdef iterationPhase_enum < Simulink.IntEnumType
     
     enumeration
         None(0),
-		REELOUT(1),
-		REELIN(2)
+		REELOUT_CWOFF(1),
+        REELOUT_CWON(2),
+		REELIN(3)
     end
 
     methods (Static)

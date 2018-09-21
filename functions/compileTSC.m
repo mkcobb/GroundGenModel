@@ -4,8 +4,11 @@ function tsc = compileTSC(logsout)
 signals = logsout.getElementNames;
 
 for ii = 1:length(signals)
-   eval(sprintf('tsc.%s = logsout.getElement(''%s'').Values;',signals{ii},signals{ii})) 
-end
     
+    eval(sprintf('tsc.%s = logsout.getElement(''%s'').Values;',...
+        replace(signals{ii},{'<','>'},''),signals{ii}))
+    
+end
+
 end
 

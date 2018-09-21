@@ -14,10 +14,10 @@ classdef smoothTransitionClass < handle
         % Rudder Controller
         kr1  = 100; % Controller gain
         kr2  = 100; % Controller gain
-        tauR = 0.0500;  % Ref model time const: 1/(tauR*s+1)^2
+        tauR = 0.05;  % Ref model time const: 1/(tauR*s+1)^2
         
         numSettlingLaps = 3;                 % Number of laps before starting tether reel out
-        numSimulationLaps = 20;               % Number of laps to run during reel out
+        numSimulationLaps = 100;               % Number of laps to run during reel out
         %         tetherReelOutFilterTimeConstant = 0.01; % Time constant used to filter reel out command
         reelSpeedTimeConstant = 1; % Time constant used to filter speed commands sent to
         
@@ -27,22 +27,25 @@ classdef smoothTransitionClass < handle
         reelInWingAlpha   = -0.035*180/pi; % Target angle of attack for wing on reel-in [deg]
         reelInRudderAlpha = 0 % Target angle of attack for rudder on reel-in [deg]
         reelInSpeed = 3;
-        reelInZenithOffsetDeg = 20;  % how far above (in zenith) the target waypoint is in reel-in.
+        reelInZenithOffsetDeg = 10;  % how far above (in zenith) the system is in reel-in (positive = smaller elevation)
         reelOutAlpha_deg = 5.7; % Angle of attack used during reel out (crosswind)
-        
+                
         % PerformanceIndexSettings
-        penaltyWeight = 25000; % weight applied to the second term of the performance index
+        penaltyWeight = 10000; % weight applied to the second term of the performance index
         
         % RLS settings
         gridAzimuth_deg = 5; % Azimuth grid spacing used in initialization
-        gridZenith_deg = 2; % Zenith grid spacing used in initialization
-        trustRegionDeltaAzimuth_deg = 5;
-        trustRegionDeltaZenith_deg  = 5;
-        learningGain = 5e-9;
-        forgettingFactor = 0.95;
-        persistenExcitationAzimuth_deg = 0.000000001;
-        persistenExcitationZenith_deg  = 0.000000001;
+        gridZenith_deg = 0.5; % Zenith grid spacing used in initialization
+        trustRegionDeltaAzimuth_norm = 2;
+        trustRegionDeltaZenith_norm  = 2;
+        learningGain = 1e-4;
+        forgettingFactor = 0.99;
+        persistenExcitationAzimuth_norm = 0.000000000000003; % Don't set to zero, noise generator block doesn't like that
+        persistenExcitationZenith_norm  = 0.000000000000003; % Don't set to zero, noise generator block doesn't like that
         
+        azimuthNormalizationFactor_deg = 5;
+        zenithNormalizationFactor_deg = 0.5;
+        performanceIndexNormalizationFactor = 1;
     end
     
     properties (Dependent = false) % Property value is stored in object
